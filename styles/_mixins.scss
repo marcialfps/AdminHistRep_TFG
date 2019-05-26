@@ -1,0 +1,50 @@
+@import 'variables';
+
+@mixin keyframes($name) {
+    @keyframes #{$name} {
+      @content; /* Microsoft */
+    } 
+    @-webkit-keyframes #{$name} { /* Safari and Chrome */
+      @content; 
+    }
+    @-moz-keyframes #{$name} { /* Firefox */
+      @content;
+    }
+    @-o-keyframes #{$name} { /* Opera */
+      @content;
+    }
+    
+}
+
+/**
+  Recibe una función de transform y la utiliza en cada tipo de 
+  navegador.
+**/
+@mixin transform($func) {
+  transform: $func;
+  -webkit-transform: $func; /* Safari and Chrome */
+  -ms-transform: $func; /* Microsoft */
+  -moz-transform: $func; /* Firefox */
+  -o-transform: $func; /* Opera */
+}
+
+/**
+  Recibe el tamaño máximo de pantalla y muestra el contenido.
+**/
+@mixin responsive-font() {
+  @media screen and (max-width: $smartphone) { @content; }
+}
+
+/**
+  Recibe el tamaño máximo de pantalla, el ancho para telefono y ancho para pantallas grandes.
+  Si el ancho mínimo es el del teléfono, se muestra el ancho de pantalla grande.
+**/
+@mixin responsive-width($width-phone, $width-wide) {
+  @media screen and (max-width: $smartphone +1) { width: $width-phone !important }; //Smartphone
+  @media screen and (min-width: $smartphone) { width: $width-wide !important }; //Wide screen
+} 
+
+@mixin responsive-height($height-phone, $height-wide) {
+  @media screen and (max-width: $smartphone +1) { height: $height-phone !important }; //Smartphone
+  @media screen and (min-width: $smartphone) { height: $height-wide !important }; //Wide screen
+} 

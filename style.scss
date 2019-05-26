@@ -1,0 +1,131 @@
+@import 'bootstrap/bootstrap';
+@import 'styles/variables';
+@import 'styles/mixins';
+
+@include keyframes(fadein){
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+header {
+    background-color: $dark-blue;
+}
+
+.img-logo {
+    @include responsive-width(2.5rem, 5rem);
+    @include responsive-height(2.5rem, 5rem);
+    
+    -webkit-animation:spin 15s linear infinite;
+    -moz-animation:spin 15s linear infinite;
+    animation:spin 15s linear infinite;
+}
+
+h1 {
+    @include responsive-font() { font-size: 1.5rem; }
+    
+    animation: fadein 1s;
+    -moz-animation: fadein 1s; 
+    -webkit-animation: fadein 1s; 
+    -o-animation: fadein 1s;
+}
+
+h2, label, p, .page-link {
+    color: $dark-blue;
+}
+
+.header-text {
+    color: $medium-blue !important;
+}
+
+.header-button {
+    color: $light-orange;
+}
+
+.alert {
+    display: none;
+}
+
+.card {
+    @include responsive-width(90%, 35%);
+
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; 
+    -webkit-animation: fadein 2s; 
+    -o-animation: fadein 2s;
+}
+
+.table {
+    @include responsive-width(90%, 60%);
+}
+
+.alert {
+    animation: fadein 0.5s;
+    -moz-animation: fadein 0.5s; 
+    -webkit-animation: fadein 0.5s; 
+    -o-animation: fadein 0.5s;
+}
+
+.card-posts {
+    @include responsive-width(95%, 80%);
+}
+
+.ui-progressbar {
+    width: 70%;
+}
+
+.welcomeMessage {
+    padding-right: 1rem !important;
+}
+
+.remove-btn {
+    background-color: $medium-red;
+    color: $light-blue;
+
+    &:hover {
+        background-color: $light-red;
+    }
+}
+
+.btn-form {
+    @include responsive-width(100%, 50%);
+}
+
+.btn-style {
+    background-color: $dark-blue;
+    color: $light-blue;
+
+    &:hover {
+        background-color: $light-orange; 
+    }
+}
+
+a:hover {
+    color: $light-blue
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+.icon-btn {
+    &:hover {
+        @include transform(scale(1.25))
+    }
+}
+
+.icon-btn, .icon-img {
+    width: 1.5rem !important;
+}
+
+.page-selected {
+    background-color: $light-red;
+    color: $light-blue; 
+}
+
+.page-link {
+    @include responsive-width(100%, 30%);
+}

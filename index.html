@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Login page">
+        <meta name="keywords" content="login">
+        <meta name="author" content="Marcial F.P.S">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+        <link rel="icon" type="img/png" href="img/favicon.png">
+        <script src="jquery-ui/external/jquery/jquery.js"></script>
+        <script src="jquery-ui/jquery-ui.min.js"></script>
+    </head>
+
+    <body>
+
+        <script src="login.js"></script>
+
+        <header>
+            <div class="d-flex justify-content-start">
+                <img class="img-logo ml-3" src="/img/logo_transparent.png">
+                <h1 class="align-self-center header-text pl-3">Welcome to social posts!</h1>
+            </div>
+        </header>
+
+        <section>
+
+            <div class="d-flex justify-content-center pt-4">
+                <div class="card">
+                    <div class="card-title d-flex align-self-center pt-2 pb-0">
+                        <h2>Log in</h2> 
+                    </div>
+                    <hr class="mt-0" />
+                    <div class="card-body ">
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="inputEmail">E-mail</label>
+                                <input type="email" class="form-control input-email" id="emailForm" 
+                                    placeholder="Enter you email" required>
+                            </div>
+            
+                            <div class="d-flex justify-content-end pt-1">
+                                <input class="btn btn-style" type="submit" value="Log in">
+                            </div>
+                        </form>
+
+                        <div class="d-flex justify-content-end pb-3">
+                            <div  class="form-check">
+                                <input type="checkbox" class="form-check-input align-self-start" 
+                                    id="remember" value="Remember">
+                                <label class="form-check-label" for="remeber">Remember</label>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-danger mb-0" role="alert" id="alert">
+                            The email is not registered.
+                        </div>
+
+                        <div class="alert alert-info mb-0" role="alert" id="alertInfo">
+                            The email should be remembered in the future.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
