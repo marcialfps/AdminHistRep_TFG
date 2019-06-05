@@ -29,7 +29,7 @@
         <section>
 
             <div class="d-flex justify-content-center pt-4">
-                <div class="card">
+                <div class="card" id="loginCard">
                     <div class="card-title d-flex align-self-center pt-2 pb-0">
                         <h2>Log in</h2> 
                     </div>
@@ -38,13 +38,13 @@
                         <form id="loginForm">
                             <div class="form-group">
                                 <label for="inputEmail">E-mail</label>
-                                <input type="email" class="form-control input-email" id="emailForm" 
+                                <input type="email" name="email" class="form-control input-email" id="emailForm" 
                                     placeholder="Enter e-mail" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="inputEmail">Password</label>
-                                <input type="password" class="form-control input-password" id="passwordForm" 
+                                <input type="password" name="password" class="form-control input-password" id="passwordForm" 
                                     placeholder="Enter password" required>
                             </div>
             
@@ -68,6 +68,25 @@
                         <div class="alert alert-info mb-0" role="alert" id="alertInfo">
                             The email should be remembered in the future.
                         </div>
+                    </div>
+                </div>
+
+                <div class="card" id="representationsCard">
+                    <h2 class="d-flex justify-content-center pb-2">Representations</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listRepresentations">
+                            <!-- Here all the representations are showed. -->
+                        </tbody>
+                    </table>
+
+                    <div id="dialog-confirm" title="Confirm the action">
+                        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Are you sure you want to permanently delete this user?</p>
                     </div>
                 </div>
             </div>

@@ -25,8 +25,8 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();   
 
-    obtainParam(progressbar);
-    obtainAllUsers(progressbar);
+    //obtainParam(progressbar);
+    obtainAllRepresentations(progressbar);
 
 });
 
@@ -61,14 +61,14 @@ function obtainUser(progressbar, id) {
     });
 }
 
-function obtainAllUsers(progressbar) {
+function obtainAllRepresentations(progressbar) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "https://jsonplaceholder.typicode.com/users"
+        url: "http://192.168.1.33:8080/representations"
     })
     .done(function(data, textStatus, jqXHR) {
-        if(data.length <= 0) { //Not existing user
+        if(data.length <= 0) { //Empty list
             console.log("The user does not exist");
         } else {
             users = data;
