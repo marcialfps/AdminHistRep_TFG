@@ -1,6 +1,6 @@
 //VARIABLES
 var userid;
-var postid;
+var representationid;
 var value = 0;
 var isEdition = false;
 
@@ -25,9 +25,12 @@ $(document).ready(function() {
     $("#updateForm").submit(function(event) {
         event.preventDefault();
         if (isEdition) {
-            savePost("PUT", $("#titleForm").val(), $("#bodyForm").html(), postid);
+            saveRepresentation("update", $("#titleForm").val(), 
+            $("#descriptionForm").html(), $("#historyForm").html(), $("#interestForm").html(),
+            $("#technicalForm").html(), $("#latitudeForm").val(), $("#longitudeForm").val(), 
+            $("#representationForm").val());
         } else {
-            savePost("POST", $("#titleForm").val(), $("#bodyForm").html(), "");
+            //savePost("POST", $("#titleForm").val(), $("#bodyForm").html(), "");
         }
     });
 });
@@ -36,53 +39,29 @@ function obtainParam(progressbar) {
     var urlparams = window.location.search.substring(1).split('&');
     console.log(urlparams)
     if (urlparams[0] == "") window.location.href = "http://127.0.0.1:5500/index.html"
-    userid = urlparams[0].split('=')[1];
-    postid = urlparams[1].split('=')[1];
+    this.userid = urlparams[0].split('=')[1];
+    this.representationid = urlparams[1].split('=')[1];
 
-    if (postid == "-1") {
+    if (this.representationid == "-1") {
         isEdition = false;
     } else {
+        isEdition = true;
         editionMode(progressbar);
     }
 
     progressbar.progressbar( "value", value + 25 );
     value += 25;
-    obtainUser(progressbar, userid);
 }
 
 function editionMode(progressbar) {
-    obtainPost(progressbar, postid);
+    obtainRepresentation(progressbar);
 }
 
-function obtainUser(progressbar, id) {
+function obtainRepresentation(progressbar) {
     $.ajax({
-        data: {"id": id},
         type: "GET",
         dataType: "json",
-        url: "https://jsonplaceholder.typicode.com/users"
-    })
-    .done(function(data, textStatus, jqXHR) {
-        if(data.length <= 0) { //Not existing user
-            console.log("The user does not exist");
-        } else {
-            if (progressbar != null) progressbar.progressbar( "value", value + 25 );
-            value += 25;
-            $("#userMessage").html("Welcome, " + data[0].name);
-            $("#administration").attr("href", "http://127.0.0.1:5500/backoffice/backoffice.html?" + userid);
-            $("#cancelBtn").attr("onclick", 'location.href="http://127.0.0.1:5500/backoffice/backoffice.html?'+userid+'"');
-        }
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("error...");
-    });
-}
-
-function obtainPost(progressbar, id) {
-    $.ajax({
-        data: {"id": id},
-        type: "GET",
-        dataType: "json",
-        url: "https://jsonplaceholder.typicode.com/posts"
+        url: "http://192.168.1.33:8080/representation/"+this.representationid
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
@@ -99,18 +78,43 @@ function obtainPost(progressbar, id) {
     });
 }
 
-function savePost(method, title, body, postid) {
+function saveRepresentation(route, title, description, history, interest, 
+    technical, latitude, longitude, representationMultimedia ) {
+    console.log("Saving representation.");
+
     $.ajax({
-        type: method,
-        data: {"userId": userid, "id": this.postid, "title":  title, "body": body},
-        url: "https://jsonplaceholder.typicode.com/posts/"+postid
+        type: "POST",
+        data: $("#updateForm").serialize(),
+        url: "http://192.168.1.33:8080/representation/"+route+"/"+this.representationid
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
             $("#alert").show();
         } else {
             $("#alert").hide();
-            window.location.href="http://127.0.0.1:5500/backoffice/backoffice.html?"+userid;
+            var fd = new FormData();
+            fd.append("file", representationForm.files[0]);
+            console.log(representationForm.files[0]);
+            $.ajax({
+                type: "POST",
+                data: fd,
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: "http://192.168.1.33:8080/representation/loadMultimedia/"+representationid
+                })
+                .done(function(data, textStatus, jqXHR) {
+                    if(data.length <= 0) { //Not existing user
+                        $("#alert").show();
+                    } else {
+                        $("#alert").hide();
+                    // window.location.href="http://127.0.0.1:5500/backoffice/backoffice.html?"+userid;
+                    
+                    }
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    $("#alert").show();
+                });
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -118,7 +122,12 @@ function savePost(method, title, body, postid) {
     });
 }
 
-function completeForm(post) {
-    $("#titleForm").val(post.title);
-    $("#bodyForm").html(post.body);
+function completeForm(rep) {
+    $("#titleForm").val(rep.title);
+    $("#descriptionForm").html(rep.description);
+    $("#historyForm").html(rep.history);
+    $("#interestForm").html(rep.interestInfo);
+    $("#technicalForm").html(rep.technicalInfo);
+    $("#latitudeForm").val(rep.latitude);
+    $("#longitudeForm").val(rep.longitude);
 }

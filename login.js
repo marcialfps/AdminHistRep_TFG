@@ -1,8 +1,10 @@
 //Global variables
-var user;
+var email;
 
 $(document).ready(function() {
     var remember_check = false;
+
+    $("#representationsCard").hide();
 
     $( "#dialog-confirm" ).dialog({
         autoOpen: false,
@@ -25,15 +27,17 @@ $(document).ready(function() {
             url: "http://192.168.1.33:8080/admin/login"
         })
         .done(function(data, textStatus, jqXHR) {
-            console.log(data.toString());
-            if(data.length <= 0 || data.toString() == "false") { //Not existing user
+            console.log(data);
+            if(data.toString() == "false") { //Not existing user
                 console.log("The user does not exist");
                 $("#alert").show();
             } else {
                 console.log("Login the user "+ $("#emailForm").val())
                 $("#alert").hide();
-                obtainRepresentations();
+                obtainUser($("#emailForm").val());
+                
                 $("#loginCard").hide();
+                this.user = data;
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
@@ -53,7 +57,27 @@ $(document).ready(function() {
     });
 });
 
-function obtainRepresentations() {
+function obtainUser(email) {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://192.168.1.33:8080/admin/"+email
+    })
+    .done(function(data, textStatus, jqXHR) {
+        if(data.length <= 0) { //Not existing user
+            console.log("ERROR");
+        } else {
+            console.log(data[0]);
+            this.user = data[0];
+            obtainRepresentations(data[0]);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        alert("Error when trying to obtain user.");
+    });
+}
+
+function obtainRepresentations(user) {
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -64,7 +88,7 @@ function obtainRepresentations() {
             console.log("ERROR");
         } else {
             console.log(data);
-            showRepresentations(data);
+            showRepresentations(data, user);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -72,7 +96,7 @@ function obtainRepresentations() {
     });
 }
 
-function showRepresentations(data) {
+function showRepresentations(data, user) {
     $("#listRepresentations").empty();
 
     $.each(data, function(index, rep) {
@@ -81,8 +105,8 @@ function showRepresentations(data) {
         '<button type="button" class="btn btn-info" id="edit-'+rep.id+'"><img class="icon-img" src="../img/edit_icon.png"></button>'+
         '<button type="button" class="btn btn-danger" id="delete-'+rep.id+'"><img class="icon-img" src="../img/delete_icon.png"></button></td></tr>');
 
-        $("#info-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/information/info.html?user='+user+'&post='+rep.id+'"');
-        $("#edit-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?user='+user+'&post='+rep.id+'"');
+        $("#info-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/information/info.html?user='+user.id+'&post='+rep.id+'"');
+        $("#edit-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?user='+user.id+'&post='+rep.id+'"');
         $("#delete-"+rep.id).click(function() {
             $( "#dialog-confirm" ).dialog({
                 buttons: {
@@ -98,6 +122,8 @@ function showRepresentations(data) {
             $("#dialog-confirm").dialog("open");
         });
     });
+
+    $("#representationsCard").show();
 }
 
 function deleteRepresentation(id) {
