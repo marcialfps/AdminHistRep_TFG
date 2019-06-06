@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Create admin">
+        <meta name="keywords" content="create admin">
+        <meta name="author" content="Marcial F.P.S">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Edition</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" href="../jquery-ui/jquery-ui.css">
+        <link rel="icon" type="img/png" href="../img/favicon.png">
+        <script src="../jquery-ui/external/jquery/jquery.js"></script>
+        <script src="../jquery-ui/jquery-ui.min.js"></script>
+    </head>
+
+    <body>
+
+        <script src="create.js"></script>
+
+        <header>
+
+            <div class="d-sm-flex justify-content-between">
+                <div class="d-flex justify-content-start">
+                    <img class="img-logo ml-3" src="../img/logo_transparent.png">
+                    <h1 class="align-self-center header-text pl-3">Backoffice</h1>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <p class="align-self-center header-text welcomeMessage my-0" id="userMessage"></p>
+                    <a class="align-self-center header-button pr-4" id="administration" data-toggle="tooltip" title="Administrate posts">
+                            <img class="icon-btn" src="../img/settings_icon.png">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section>
+
+            <div class="d-flex justify-content-center pt-4">
+                <div class="card">
+                    <div class="card-title d-flex align-self-center pt-2 pb-0">
+                        <h2>Create admin</h2> 
+                    </div>
+                    <hr class="mt-0" />
+                    <div class="card-body ">
+                        <form id="createForm">
+                            <div class="form-group">
+                                <label for="inputName">Name</label>
+                                <input type="text" class="form-control" id="nameForm" 
+                                    name="name" placeholder="Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputLastname">Lastname</label>
+                                <input type="text" class="form-control" id="lastnameForm" 
+                                    name="lastname" placeholder="Lastname" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputLastname">E-mail</label>
+                                <input type="email" class="form-control" id="emailForm" 
+                                    name="email" placeholder="E-mail" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPassword">Password</label>
+                                <input type="password" class="form-control" id="passwordForm" 
+                                    name="password" placeholder="Password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPasswordConfirm">Repeat password</label>
+                                <input type="password" class="form-control" id="passwordConfirmForm" 
+                                    name="passwordConfirm" placeholder="Password repeat" required>
+                            </div>
+
+                            <div class="d-sm-flex justify-content-between">
+                                <button class="btn remove-btn btn-form mb-1" id="cancelBtn" type="button">Cancel</button>
+                                <input class="btn btn-style btn-form" type="submit" value="Create">
+                            </div>
+
+                        </form>
+
+                        <div class="alert alert-danger mb-0 mt-2" role="alert" id="alert">
+                            An error ocurred when trying to save the admin.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

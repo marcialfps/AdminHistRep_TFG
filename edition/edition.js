@@ -24,24 +24,21 @@ $(document).ready(function() {
 
     $("#updateForm").submit(function(event) {
         event.preventDefault();
-        if (isEdition) {
-            saveRepresentation("update");
-        } else {
-            //savePost("POST", $("#titleForm").val(), $("#bodyForm").html(), "");
-        }
+        saveRepresentation();
     });
 
     $("#cancelBtn").click(function (){
-        window.history.back();
+        window.location.href = "http://127.0.0.1:5500/index.html"
     });
 });
 
 function obtainParam(progressbar) {
     var urlparams = window.location.search.substring(1).split('&');
     console.log(urlparams)
-    if (urlparams[0] == "") window.location.href = "http://127.0.0.1:5500/index.html"
-    this.userid = urlparams[0].split('=')[1];
-    this.representationid = urlparams[1].split('=')[1];
+    if (urlparams[0] == "") window.location.href = "http://127.0.0.1:5500/index.html";
+    var user = localStorage.getItem('id');
+    if (!user) window.location.href = "http://127.0.0.1:5500/index.html";
+    this.representationid = urlparams[0].split('=')[1];
 
     if (this.representationid == "-1") {
         isEdition = false;
@@ -79,45 +76,55 @@ function obtainRepresentation(progressbar) {
     });
 }
 
-function saveRepresentation(route) {
+function saveRepresentation() {
     console.log("Saving representation.");
+    var url;
+    if(isEdition)
+        url = "http://192.168.1.33:8080/representation/update/"+this.representationid;
+    else
+        url = "http://192.168.1.33:8080/representation/add";
 
     $.ajax({
         type: "POST",
         data: $("#updateForm").serialize(),
-        url: "http://192.168.1.33:8080/representation/"+route+"/"+this.representationid
+        url: url
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
             $("#alert").show();
         } else {
+            console.log(data[0]);
             $("#alert").hide();
-            var fd = new FormData();
-            fd.append("file", representationForm.files[0]);
-            console.log(representationForm.files[0]);
-            $.ajax({
-                type: "POST",
-                data: fd,
-                cache: false,
-                contentType: false,
-                processData: false,
-                url: "http://192.168.1.33:8080/representation/loadMultimedia/"+representationid
-                })
-                .done(function(data, textStatus, jqXHR) {
-                    if(data.length <= 0) { //Not existing user
-                        $("#alert").show();
-                    } else {
-                        $("#alert").hide();
-                        window.history.back();
-                    }
-                })
-                .fail(function(jqXHR, textStatus, errorThrown) {
-                    $("#alert").show();
-                });
+            saveMultimedia(data[0]);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         $("#alert").show();
+    });
+}
+
+function saveMultimedia(rep) {
+    var fd = new FormData();
+    fd.append("file", representationForm.files[0]);
+    console.log(representationForm.files[0]);
+    $.ajax({
+        type: "POST",
+        data: fd,
+        cache: false,
+        contentType: false,
+        processData: false,
+        url: "http://192.168.1.33:8080/representation/loadMultimedia/"+rep.id
+        })
+        .done(function(data, textStatus, jqXHR) {
+            if(data.length <= 0) { //Not existing user
+                $("#alert").show();
+            } else {
+                $("#alert").hide();
+                window.location.href = "http://127.0.0.1:5500/index.html"
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            $("#alert").show();
     });
 }
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Information page">
+        <meta name="keywords" content="information">
+        <meta name="author" content="Marcial F.P.S">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" href="../jquery-ui/jquery-ui.css">
+        <link rel="icon" type="img/png" href="../img/favicon.png">
+        <script src="../jquery-ui/external/jquery/jquery.js"></script>
+        <script src="../jquery-ui/jquery-ui.min.js"></script>
+    </head>
+
+    <body>
+
+        <script src="info.js"></script>
+
+        <header>
+            <div class="d-flex justify-content-start">
+                
+                <div class="d-sm-flex justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <h1 class="align-self-center header-text pl-3">HistRep administration</h1>
+                    </div>
+    
+                    <div class="d-flex justify-content-between">
+                        <p class=" header-text welcomeMessage my-0" id="userMessage"></p>
+                        <a class=" header-button pr-4" id="home" data-toggle="tooltip" title="Go back to home">
+                                <img class="icon-btn" src="../img/home_icon.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="d-flex justify-content-center pt-4">
+                <div class="card big-card" id="representationsCard">
+                    <h2 class="d-flex justify-content-center pb-2" id="title">Title</h2>
+                        <p class="d-flex justify-content-center" id="description">Description</p>
+                        <p class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary" id="history">History</button>
+                            <button type="button" class="btn btn-primary" id="interest">Interest info</button>
+                            <button type="button" class="btn btn-primary" id="technical">Technical info</button>
+                            <button type="button" class="btn btn-primary" id="location">Location</button>
+                            <button type="button" class="btn btn-primary" id="representation">Representation</button>
+                        </p>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="card d-flex justify-content-center" id="content">
+                                    <!-- Here the content is showed.-->
+                            </div>
+                        <div class="d-flex justify-content-center pt-4"></div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

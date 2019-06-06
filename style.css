@@ -10702,7 +10702,7 @@ h2, label, p, .page-link {
 
 @media screen and (min-width: 768px) {
   .big-card {
-    width: 50% !important;
+    width: 90% !important;
   }
 }
 
@@ -10755,14 +10755,14 @@ h2, label, p, .page-link {
 }
 
 @media screen and (max-width: 769px) {
-  .btn-form {
-    width: 100% !important;
+  .btn-add {
+    width: 90% !important;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .btn-form {
-    width: 50% !important;
+  .btn-add {
+    width: 90% !important;
   }
 }
 

@@ -59,7 +59,7 @@ h2, label, p, .page-link {
 }
 
 .big-card {
-    @include responsive-width(90%, 50%);
+    @include responsive-width(90%, 90%);
 
     animation: fadein 2s;
     -moz-animation: fadein 2s; 
@@ -99,8 +99,8 @@ h2, label, p, .page-link {
     }
 }
 
-.btn-form {
-    @include responsive-width(100%, 50%);
+.btn-add {
+    @include responsive-width(90%, 90%);
 }
 
 .btn-style {

@@ -1,5 +1,6 @@
 //Global variables
 var email;
+var user;
 
 $(document).ready(function() {
     var remember_check = false;
@@ -14,9 +15,9 @@ $(document).ready(function() {
         modal: true
       });
 
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('id')) {
         $("#loginCard").hide();
-        obtainRepresentations(localStorage.getItem('user'));
+        obtainRepresentations(localStorage.getItem('id'));
     }
 
     /**
@@ -75,8 +76,8 @@ function obtainUser(email) {
             console.log(data[0]);
             this.user = data[0];
             // Store it in the local storage
-            localStorage.setItem('user', data[0]);
-            obtainRepresentations(data[0]);
+            localStorage.setItem('id', data[0].id);
+            obtainRepresentations(data[0].id);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -104,6 +105,7 @@ function obtainRepresentations(user) {
 }
 
 function showRepresentations(data, user) {
+    console.log(user);
     $("#listRepresentations").empty();
 
     $.each(data, function(index, rep) {
@@ -112,13 +114,13 @@ function showRepresentations(data, user) {
         '<button type="button" class="btn btn-info" id="edit-'+rep.id+'"><img class="icon-img" src="../img/edit_icon.png"></button>'+
         '<button type="button" class="btn btn-danger" id="delete-'+rep.id+'"><img class="icon-img" src="../img/delete_icon.png"></button></td></tr>');
 
-        $("#info-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/information/info.html?user='+user.id+'&post='+rep.id+'"');
-        $("#edit-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?user='+user.id+'&post='+rep.id+'"');
+        $("#info-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/information/info.html?post='+rep.id+'"');
+        $("#edit-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?post='+rep.id+'"');
         $("#delete-"+rep.id).click(function() {
             $( "#dialog-confirm" ).dialog({
                 buttons: {
                     "Confirm": function() {
-                        deleteRepresentation(rep.id);   
+                        deleteRepresentation(rep.id, user.id);   
                         $( this ).dialog( "close" );            
                     },
                     Cancel: function() {
@@ -130,10 +132,14 @@ function showRepresentations(data, user) {
         });
     });
 
+    $("#btnAdd").attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?post=-1"');
+    $("#addAdmin").attr("onclick", 'location.href="http://127.0.0.1:5500/admin/create.html"');
+    $("#editAdmin").attr("onclick", 'location.href="http://127.0.0.1:5500/admin/create.html?edit"');
     $("#representationsCard").show();
 }
 
 function deleteRepresentation(id) {
+    var user = localStorage.getItem('id');
     console.log("Trying to remove representation "+id);
     $.ajax({
         type: "GET",
@@ -144,7 +150,7 @@ function deleteRepresentation(id) {
         if(data.length <= 0 || data.toString() == "Error") { //Not existing user
             console.log("ERROR");
         } else {
-            obtainRepresentations();
+            obtainRepresentations(user.id);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {

@@ -20,9 +20,25 @@
         <script src="login.js"></script>
 
         <header>
+            <!--
             <div class="d-flex justify-content-start">
-                <!-- <img class="img-logo ml-3" src="/img/logo_transparent.png"> -->
                 <h1 class="align-self-center header-text pl-3">HistRep administration</h1>
+            </div>
+            -->
+            <div class="d-sm-flex justify-content-between">
+                <div class="d-flex justify-content-center">
+                    <img class="img-logo ml-3" src="../img/logo_transparent.png">
+                    <h1 class="align-self-center header-text pl-3">Home</h1>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <a class="align-self-center header-button pr-4" id="addAdmin" data-toggle="tooltip" data-trigger="active" title="Create admin">
+                            <img class="icon-btn" src="../img/person_add.png">
+                    </a>
+                    <a class="align-self-center header-button pr-4" id="editAdmin" data-toggle="tooltip" data-trigger="active" title="Edit my account">
+                        <img class="icon-btn" src="../img/settings_icon.png">
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -85,6 +101,11 @@
                                 <!-- Here all the representations are showed. -->
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary btn-add" id="btnAdd">
+                            <img class="icon-img" src="../img/add_icon.png">
+                        </button>
                     </div>
                     <div id="dialog-confirm" title="Confirm the action">
                         <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Are you sure you want to permanently delete this user?</p>
