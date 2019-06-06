@@ -25,13 +25,14 @@ $(document).ready(function() {
     $("#updateForm").submit(function(event) {
         event.preventDefault();
         if (isEdition) {
-            saveRepresentation("update", $("#titleForm").val(), 
-            $("#descriptionForm").html(), $("#historyForm").html(), $("#interestForm").html(),
-            $("#technicalForm").html(), $("#latitudeForm").val(), $("#longitudeForm").val(), 
-            $("#representationForm").val());
+            saveRepresentation("update");
         } else {
             //savePost("POST", $("#titleForm").val(), $("#bodyForm").html(), "");
         }
+    });
+
+    $("#cancelBtn").click(function (){
+        window.history.back();
     });
 });
 
@@ -78,8 +79,7 @@ function obtainRepresentation(progressbar) {
     });
 }
 
-function saveRepresentation(route, title, description, history, interest, 
-    technical, latitude, longitude, representationMultimedia ) {
+function saveRepresentation(route) {
     console.log("Saving representation.");
 
     $.ajax({
@@ -108,8 +108,7 @@ function saveRepresentation(route, title, description, history, interest,
                         $("#alert").show();
                     } else {
                         $("#alert").hide();
-                    // window.location.href="http://127.0.0.1:5500/backoffice/backoffice.html?"+userid;
-                    
+                        window.history.back();
                     }
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {

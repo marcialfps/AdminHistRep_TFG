@@ -10687,6 +10687,25 @@ h2, label, p, .page-link {
   }
 }
 
+.big-card {
+  animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -webkit-animation: fadein 2s;
+  -o-animation: fadein 2s;
+}
+
+@media screen and (max-width: 769px) {
+  .big-card {
+    width: 90% !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .big-card {
+    width: 50% !important;
+  }
+}
+
 @media screen and (max-width: 769px) {
   .table {
     width: 90% !important;
@@ -10695,7 +10714,7 @@ h2, label, p, .page-link {
 
 @media screen and (min-width: 768px) {
   .table {
-    width: 60% !important;
+    width: 90% !important;
   }
 }
 

@@ -14,6 +14,11 @@ $(document).ready(function() {
         modal: true
       });
 
+    if (localStorage.getItem('user')) {
+        $("#loginCard").hide();
+        obtainRepresentations(localStorage.getItem('user'));
+    }
+
     /**
      * This function call the service and obtain the user that
      * corresponds to the email introduced. If the service doesnt 
@@ -69,6 +74,8 @@ function obtainUser(email) {
         } else {
             console.log(data[0]);
             this.user = data[0];
+            // Store it in the local storage
+            localStorage.setItem('user', data[0]);
             obtainRepresentations(data[0]);
         }
     })

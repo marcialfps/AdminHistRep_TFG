@@ -58,8 +58,17 @@ h2, label, p, .page-link {
     -o-animation: fadein 2s;
 }
 
+.big-card {
+    @include responsive-width(90%, 50%);
+
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; 
+    -webkit-animation: fadein 2s; 
+    -o-animation: fadein 2s;
+}
+
 .table {
-    @include responsive-width(90%, 60%);
+    @include responsive-width(90%, 90%);
 }
 
 .alert {
