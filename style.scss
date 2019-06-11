@@ -12,16 +12,12 @@
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 header {
-    background-color: $dark-blue;
+    background-color: $header;
 }
 
 .img-logo {
     @include responsive-width(2.5rem, 5rem);
     @include responsive-height(2.5rem, 5rem);
-    
-    -webkit-animation:spin 15s linear infinite;
-    -moz-animation:spin 15s linear infinite;
-    animation:spin 15s linear infinite;
 }
 
 h1 {
@@ -31,14 +27,19 @@ h1 {
     -moz-animation: fadein 1s; 
     -webkit-animation: fadein 1s; 
     -o-animation: fadein 1s;
+    color: $text-header;
 }
 
-h2, label, p, .page-link {
-    color: $dark-blue;
+h2 {
+    @include responsive-font() { font-size: 1.5rem; }
+}
+
+h2, label {
+    color: $header;
 }
 
 .header-text {
-    color: $medium-blue !important;
+    color: $text-header !important;
 }
 
 .header-button {
@@ -71,6 +72,10 @@ h2, label, p, .page-link {
     @include responsive-width(90%, 90%);
 }
 
+.table-rep {
+    @include responsive-width(95%, 70%);
+}
+
 .alert {
     animation: fadein 0.5s;
     -moz-animation: fadein 0.5s; 
@@ -100,15 +105,48 @@ h2, label, p, .page-link {
 }
 
 .btn-add {
-    @include responsive-width(90%, 90%);
+    @include responsive-width(95%, 70%);
+    background-color: $light-blue !important;
+    border-color: $header;
+    color: $text-header;
+    &:hover {
+        background-color: $header !important;
+    }
+}
+
+.btn-primary {
+    background-color: $light-green !important;
+    border-color: $dark-green;
+    color: $text-header;
+    &:hover {
+        background-color: $dark-green !important;
+    }
+}
+
+.btn-edit {
+    background-color: $light-yellow !important;
+    border-color: $dark-yellow;
+    color: $text-header;
+    &:hover {
+        background-color: $dark-yellow !important;
+    }
+}
+
+.btn-danger {
+    background-color: $light-red !important;
+    border-color: $dark-red;
+    color: $text-header;
+    &:hover {
+        background-color: $dark-red !important;
+    }
 }
 
 .btn-style {
-    background-color: $dark-blue;
-    color: $light-blue;
+    background-color: $header;
+    color: $text-header;
 
     &:hover {
-        background-color: $light-orange; 
+        background-color: $light-blue; 
     }
 }
 

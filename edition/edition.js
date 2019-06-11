@@ -1,25 +1,16 @@
 //VARIABLES
 var userid;
 var representationid;
-var value = 0;
 var isEdition = false;
 
 $(document).ready(function() {
-
-    var progressbar = $( "#progressbar" ),
-        progressLabel = $( ".progress-label" );
-    
-
-    progressbar.progressbar({
-        value: false,
-        change: function() {
-        progressLabel.text( progressbar.progressbar( "value" ) + "%" );
-        }
+    $("#home").click(function (){
+        window.location.href = "http://127.0.0.1:5500/index.html"
     });
 
     $('[data-toggle="tooltip"]').tooltip();   
 
-    obtainParam(progressbar);
+    obtainParam();
     
 
     $("#updateForm").submit(function(event) {
@@ -32,7 +23,7 @@ $(document).ready(function() {
     });
 });
 
-function obtainParam(progressbar) {
+function obtainParam() {
     var urlparams = window.location.search.substring(1).split('&');
     console.log(urlparams)
     if (urlparams[0] == "") window.location.href = "http://127.0.0.1:5500/index.html";
@@ -44,31 +35,25 @@ function obtainParam(progressbar) {
         isEdition = false;
     } else {
         isEdition = true;
-        editionMode(progressbar);
+        editionMode();
     }
-
-    progressbar.progressbar( "value", value + 25 );
-    value += 25;
 }
 
-function editionMode(progressbar) {
-    obtainRepresentation(progressbar);
+function editionMode() {
+    obtainRepresentation();
 }
 
-function obtainRepresentation(progressbar) {
+function obtainRepresentation() {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://192.168.1.33:8080/representation/"+this.representationid
+        url: "http://192.168.1.35:8080/representation/"+this.representationid
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
             console.log("ERROR");
         } else {
-            progressbar.progressbar( "value", value + 50 );
-            value += 50;
             completeForm(data[0]);
-            progressbar.hide();
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -80,9 +65,9 @@ function saveRepresentation() {
     console.log("Saving representation.");
     var url;
     if(isEdition)
-        url = "http://192.168.1.33:8080/representation/update/"+this.representationid;
+        url = "http://192.168.1.35:8080/representation/update/"+this.representationid;
     else
-        url = "http://192.168.1.33:8080/representation/add";
+        url = "http://192.168.1.35:8080/representation/add";
 
     $.ajax({
         type: "POST",
@@ -96,6 +81,7 @@ function saveRepresentation() {
             console.log(data[0]);
             $("#alert").hide();
             saveMultimedia(data[0]);
+            saveImage(data[0]);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -113,7 +99,32 @@ function saveMultimedia(rep) {
         cache: false,
         contentType: false,
         processData: false,
-        url: "http://192.168.1.33:8080/representation/loadMultimedia/"+rep.id
+        url: "http://192.168.1.35:8080/representation/loadMultimedia/"+rep.id
+        })
+        .done(function(data, textStatus, jqXHR) {
+            if(data.length <= 0) { //Not existing user
+                $("#alert").show();
+            } else {
+                $("#alert").hide();
+                window.location.href = "http://127.0.0.1:5500/index.html"
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            $("#alert").show();
+    });
+}
+
+function saveImage(rep) {
+    var fd = new FormData();
+    fd.append("file", representationImageForm.files[0]);
+    console.log(representationForm.files[0]);
+    $.ajax({
+        type: "POST",
+        data: fd,
+        cache: false,
+        contentType: false,
+        processData: false,
+        url: "http://192.168.1.35:8080/representation/loadMultimedia/"+rep.id
         })
         .done(function(data, textStatus, jqXHR) {
             if(data.length <= 0) { //Not existing user

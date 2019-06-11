@@ -2,15 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="description" content="Login page">
-        <meta name="keywords" content="login">
+        <meta name="description" content="Administration page">
+        <meta name="keywords" content="administration">
         <meta name="author" content="Marcial F.P.S">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Login</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
-        <link rel="icon" type="img/png" href="img/favicon.png">
+        <link rel="icon" type="img/png" href="img/logo.png">
         <script src="jquery-ui/external/jquery/jquery.js"></script>
         <script src="jquery-ui/jquery-ui.min.js"></script>
     </head>
@@ -20,15 +20,10 @@
         <script src="login.js"></script>
 
         <header>
-            <!--
-            <div class="d-flex justify-content-start">
-                <h1 class="align-self-center header-text pl-3">HistRep administration</h1>
-            </div>
-            -->
             <div class="d-sm-flex justify-content-between">
                 <div class="d-flex justify-content-center">
-                    <img class="img-logo ml-3" src="../img/logo_transparent.png">
-                    <h1 class="align-self-center header-text pl-3">Home</h1>
+                    <img class="img-logo ml-3" src="../img/logo.png">
+                    <h1 class="align-self-center header-text pl-3">Administration</h1>
                 </div>
 
                 <div class="d-flex justify-content-end">
@@ -37,6 +32,9 @@
                     </a>
                     <a class="align-self-center header-button pr-4" id="editAdmin" data-toggle="tooltip" data-trigger="active" title="Edit my account">
                         <img class="icon-btn" src="../img/settings_icon.png">
+                    </a>
+                    <a class="align-self-center header-button pr-4" id="logoutAdmin" data-toggle="tooltip" data-trigger="active" title="Log out">
+                        <img class="icon-btn" src="../img/exit_icon.png">
                     </a>
                 </div>
             </div>
@@ -69,6 +67,7 @@
                             </div>
                         </form>
 
+                        <!--
                         <div class="d-flex justify-content-end pb-3">
                             <div  class="form-check">
                                 <input type="checkbox" class="form-check-input align-self-start" 
@@ -76,6 +75,7 @@
                                 <label class="form-check-label" for="remeber">Remember</label>
                             </div>
                         </div>
+                        -->
 
                         <div class="alert alert-danger mb-0" role="alert" id="alert">
                             The email is not registered.
@@ -88,9 +88,9 @@
                 </div>
 
                 <div class="card big-card" id="representationsCard">
-                    <h2 class="d-flex justify-content-center pb-2">Representations</h2>
+                    <h2 class="d-flex justify-content-center py-2">Representations</h2>
                     <div class ="d-flex justify-content-center">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-rep">
                             <thead>
                                 <tr>
                                 <th scope="col">Title</th>
@@ -102,13 +102,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center pb-2">
                         <button type="button" class="btn btn-secondary btn-add" id="btnAdd">
                             <img class="icon-img" src="../img/add_icon.png">
                         </button>
                     </div>
                     <div id="dialog-confirm" title="Confirm the action">
-                        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Are you sure you want to permanently delete this user?</p>
+                        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;">
+                        </span>Are you sure you want to permanently delete this representation?</p>
                     </div>
                 </div>
             </div>

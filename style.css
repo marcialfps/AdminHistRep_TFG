@@ -10607,12 +10607,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 header {
-  background-color: #204E5F;
-}
-
-.img-logo {
-  -webkit-animation: spin 15s linear infinite;
-  animation: spin 15s linear infinite;
+  background-color: #3264A6;
 }
 
 @media screen and (max-width: 769px) {
@@ -10644,6 +10639,7 @@ h1 {
   -moz-animation: fadein 1s;
   -webkit-animation: fadein 1s;
   -o-animation: fadein 1s;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
@@ -10652,12 +10648,18 @@ h1 {
   }
 }
 
-h2, label, p, .page-link {
-  color: #204E5F;
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+h2, label {
+  color: #3264A6;
 }
 
 .header-text {
-  color: #B7D7D8 !important;
+  color: white !important;
 }
 
 .header-button {
@@ -10718,6 +10720,18 @@ h2, label, p, .page-link {
   }
 }
 
+@media screen and (max-width: 769px) {
+  .table-rep {
+    width: 95% !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .table-rep {
+    width: 70% !important;
+  }
+}
+
 .alert {
   animation: fadein 0.5s;
   -moz-animation: fadein 0.5s;
@@ -10747,36 +10761,76 @@ h2, label, p, .page-link {
 
 .remove-btn {
   background-color: #FF5461;
-  color: #EDF7F5;
+  color: #81B4D4;
 }
 
 .remove-btn:hover {
-  background-color: #FF8984;
+  background-color: #FD5431;
+}
+
+.btn-add {
+  background-color: #81B4D4 !important;
+  border-color: #3264A6;
+  color: white;
 }
 
 @media screen and (max-width: 769px) {
   .btn-add {
-    width: 90% !important;
+    width: 95% !important;
   }
 }
 
 @media screen and (min-width: 768px) {
   .btn-add {
-    width: 90% !important;
+    width: 70% !important;
   }
 }
 
+.btn-add:hover {
+  background-color: #3264A6 !important;
+}
+
+.btn-primary {
+  background-color: #69AF8F !important;
+  border-color: #568F75;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #568F75 !important;
+}
+
+.btn-edit {
+  background-color: #ECC45A !important;
+  border-color: #CCAA4E;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #CCAA4E !important;
+}
+
+.btn-danger {
+  background-color: #FD5431 !important;
+  border-color: #BD3D24;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #BD3D24 !important;
+}
+
 .btn-style {
-  background-color: #204E5F;
-  color: #EDF7F5;
+  background-color: #3264A6;
+  color: white;
 }
 
 .btn-style:hover {
-  background-color: #FFC6A8;
+  background-color: #81B4D4;
 }
 
 a:hover {
-  color: #EDF7F5;
+  color: #81B4D4;
 }
 
 .modal.show {
@@ -10800,8 +10854,8 @@ a:hover {
 }
 
 .page-selected {
-  background-color: #FF8984;
-  color: #EDF7F5;
+  background-color: #FD5431;
+  color: #81B4D4;
 }
 
 @media screen and (max-width: 769px) {

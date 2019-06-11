@@ -3,6 +3,9 @@ var isCreation = false;
 var userId;
 
 $(document).ready(function() {
+    $("#home").click(function (){
+        window.location.href = "http://127.0.0.1:5500/index.html"
+    });
 
     obtainParam();
 
@@ -35,7 +38,7 @@ function obtainUser(id) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://192.168.1.33:8080/adminId/"+id
+        url: "http://192.168.1.35:8080/adminId/"+id
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
@@ -60,9 +63,9 @@ function saveAdmin() {
     console.log("Saving admin.");
     var url;
     if (this.isCreation) {
-        url = "http://192.168.1.33:8080/admin/add";
+        url = "http://192.168.1.35:8080/admin/add";
     } else {
-        url = "http://192.168.1.33:8080/admin/update/"+this.userId;
+        url = "http://192.168.1.35:8080/admin/update/"+this.userId;
     }
 
     $.ajax({

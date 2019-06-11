@@ -7,10 +7,10 @@
         <meta name="author" content="Marcial F.P.S">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Edition</title>
+        <title>Admin edition</title>
         <link rel="stylesheet" type="text/css" href="../style.css">
         <link rel="stylesheet" href="../jquery-ui/jquery-ui.css">
-        <link rel="icon" type="img/png" href="../img/favicon.png">
+        <link rel="icon" type="img/png" href="../img/logo.png">
         <script src="../jquery-ui/external/jquery/jquery.js"></script>
         <script src="../jquery-ui/jquery-ui.min.js"></script>
     </head>
@@ -20,17 +20,15 @@
         <script src="create.js"></script>
 
         <header>
-
             <div class="d-sm-flex justify-content-between">
-                <div class="d-flex justify-content-start">
-                    <img class="img-logo ml-3" src="../img/logo_transparent.png">
-                    <h1 class="align-self-center header-text pl-3">Backoffice</h1>
+                <div class="d-flex justify-content-center">
+                    <img class="img-logo ml-3" src="../img/logo.png">
+                    <h1 class="align-self-center header-text pl-3">Administration</h1>
                 </div>
 
                 <div class="d-flex justify-content-end">
-                    <p class="align-self-center header-text welcomeMessage my-0" id="userMessage"></p>
-                    <a class="align-self-center header-button pr-4" id="administration" data-toggle="tooltip" title="Administrate posts">
-                            <img class="icon-btn" src="../img/settings_icon.png">
+                    <a class="align-self-center header-button pr-4" id="home" data-toggle="tooltip" data-trigger="active" title="Go back home">
+                            <img class="icon-btn" src="../img/home_icon.png">
                     </a>
                 </div>
             </div>
@@ -77,8 +75,8 @@
                             </div>
 
                             <div class="d-sm-flex justify-content-between">
-                                <button class="btn remove-btn btn-form mb-1" id="cancelBtn" type="button">Cancel</button>
-                                <input class="btn btn-style btn-form" type="submit" value="Create">
+                                <button class="btn remove-btn btn-danger mb-1" id="cancelBtn" type="button">Cancel</button>
+                                <input class="btn btn-style btn-primary" type="submit" value="Save">
                             </div>
 
                         </form>
