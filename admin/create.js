@@ -1,6 +1,7 @@
 //Global variables
 var isCreation = false;
 var userId;
+var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
     $("#home").click(function (){
@@ -38,7 +39,7 @@ function obtainUser(id) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://192.168.1.35:8080/adminId/"+id
+        url: DBUrl+"/adminId/"+id
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
@@ -63,9 +64,9 @@ function saveAdmin() {
     console.log("Saving admin.");
     var url;
     if (this.isCreation) {
-        url = "http://192.168.1.35:8080/admin/add";
+        url = DBUrl+"/admin/add";
     } else {
-        url = "http://192.168.1.35:8080/admin/update/"+this.userId;
+        url = DBUrl+"/admin/update/"+this.userId;
     }
 
     $.ajax({

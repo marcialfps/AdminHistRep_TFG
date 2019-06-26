@@ -1,6 +1,7 @@
 //Global variables
 var email;
 var user;
+var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
     //var remember_check = false;
@@ -31,7 +32,7 @@ $(document).ready(function() {
         $.ajax({
             data: $(this).serialize(),
             type: "POST",
-            url: "http://192.168.1.35:8080/admin/login"
+            url: DBUrl+"/admin/login"
         })
         .done(function(data, textStatus, jqXHR) {
             console.log(data);
@@ -76,7 +77,7 @@ function obtainUser(email) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://192.168.1.35:8080/admin/"+email
+        url: DBUrl+"/admin/"+email
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
@@ -98,7 +99,7 @@ function obtainRepresentations(user) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://192.168.1.35:8080/representations"
+        url: DBUrl+"/representations"
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
@@ -154,7 +155,7 @@ function deleteRepresentation(id) {
     $.ajax({
         type: "GET",
         dataType: "text",
-        url: "http://192.168.1.35:8080/representation/delete/"+id
+        url: DBUrl+"/representation/delete/"+id
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0 || data.toString() == "Error") { //Not existing user

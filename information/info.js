@@ -2,8 +2,9 @@
 var representationid;
 var Url1 = "http://maps.googleapis.com/maps/api/staticmap?center=";
 var Url2 = "&markers=color:blue%7Clabel:You%7C";
-var Url3 = "&zoom=20&size=400x500&maptype=terrain&key=AIzaSyDIhY8U0bDAtyYyJw-iuIBI2a1KPWbYMJE";
+var Url3 = "&zoom=17&size=400x500&maptype=terrain&key=AIzaSyDIhY8U0bDAtyYyJw-iuIBI2a1KPWbYMJE";
 var key = "&key=AIzaSyDIhY8U0bDAtyYyJw-iuIBI2a1KPWbYMJE";
+var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
     $("#contentContainer").hide();
@@ -29,7 +30,7 @@ function obtainRepresentation(progressbar) {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://192.168.1.35:8080/representation/"+this.representationid
+        url: DBUrl+"/representation/"+this.representationid
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
@@ -66,7 +67,11 @@ function completePage(rep) {
     $("#representation").click(function (){
         $("#content").empty();
         $("#content").html('<video controls>'+
-            '<source src="http://192.168.1.35:8080/videos/rep-'+rep.id+'.mp4" type="video/mp4"></video>');
+            '<source src="https://serverhistrep.herokuapp.com/videos/rep-'+rep.id+'.mp4" type="video/mp4"></video>');
+    });
+    $("#representationImage").click(function (){
+        $("#content").empty();
+        $("#content").html('<img height="500" width="423" src="https://serverhistrep.herokuapp.com/images/img-'+rep.id+'.png">');
     });
 
     $("#historyForm").html(rep.history);

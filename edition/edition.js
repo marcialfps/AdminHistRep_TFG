@@ -2,6 +2,7 @@
 var userid;
 var representationid;
 var isEdition = false;
+var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
     $("#home").click(function (){
@@ -47,7 +48,7 @@ function obtainRepresentation() {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "http://192.168.1.35:8080/representation/"+this.representationid
+        url: DBUrl+"/representation/"+this.representationid
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
@@ -65,9 +66,9 @@ function saveRepresentation() {
     console.log("Saving representation.");
     var url;
     if(isEdition)
-        url = "http://192.168.1.35:8080/representation/update/"+this.representationid;
+        url = DBUrl+"/representation/update/"+this.representationid;
     else
-        url = "http://192.168.1.35:8080/representation/add";
+        url = DBUrl+"/representation/add";
 
     $.ajax({
         type: "POST",
@@ -99,7 +100,7 @@ function saveMultimedia(rep) {
         cache: false,
         contentType: false,
         processData: false,
-        url: "http://192.168.1.35:8080/representation/loadMultimedia/"+rep.id
+        url: DBUrl+"/representation/loadMultimedia/"+rep.id
         })
         .done(function(data, textStatus, jqXHR) {
             if(data.length <= 0) { //Not existing user
@@ -124,7 +125,7 @@ function saveImage(rep) {
         cache: false,
         contentType: false,
         processData: false,
-        url: "http://192.168.1.35:8080/representation/loadMultimedia/"+rep.id
+        url: DBUrl+"/representation/loadMultimedia/"+rep.id
         })
         .done(function(data, textStatus, jqXHR) {
             if(data.length <= 0) { //Not existing user
