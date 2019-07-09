@@ -115,9 +115,9 @@ function showRepresentations(data, user) {
 
     $.each(data, function(index, rep) {
         $("#listRepresentations").append('<tr><td>'+rep.title+'</td>'+
-        '<td><button type="button" class="btn btn-primary mr-2" id="info-'+rep.id+'"><img class="icon-img" src="../img/info_icon.png"></button>'+
-        '<button type="button" class="btn btn-info btn-edit mr-2" id="edit-'+rep.id+'"><img class="icon-img" src="../img/edit_icon.png"></button>'+
-        '<button type="button" class="btn btn-danger mr-2" id="delete-'+rep.id+'"><img class="icon-img" src="../img/delete_icon.png"></button></td></tr>');
+        '<td><button type="button" class="btn btn-primary mr-2" id="info-'+rep.id+'"><img class="icon-img" src="img/info_icon.png"></button>'+
+        '<button type="button" class="btn btn-info btn-edit mr-2" id="edit-'+rep.id+'"><img class="icon-img" src="img/edit_icon.png"></button>'+
+        '<button type="button" class="btn btn-danger mr-2" id="delete-'+rep.id+'"><img class="icon-img" src="img/delete_icon.png"></button></td></tr>');
 
         $("#info-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/information/info.html?post='+rep.id+'"');
         $("#edit-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?post='+rep.id+'"');
