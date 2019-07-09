@@ -100,6 +100,7 @@ function saveMultimedia(rep) {
         cache: false,
         contentType: false,
         processData: false,
+        async: false,
         url: DBUrl+"/representation/loadMultimedia/"+rep.id
         })
         .done(function(data, textStatus, jqXHR) {
@@ -125,6 +126,7 @@ function saveImage(rep) {
         cache: false,
         contentType: false,
         processData: false,
+        async: false,
         url: DBUrl+"/representation/loadMultimedia/"+rep.id
         })
         .done(function(data, textStatus, jqXHR) {

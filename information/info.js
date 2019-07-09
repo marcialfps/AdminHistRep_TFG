@@ -71,7 +71,7 @@ function completePage(rep) {
     });
     $("#representationImage").click(function (){
         $("#content").empty();
-        $("#content").html('<img height="500" width="423" src="https://serverhistrep.herokuapp.com/images/img-'+rep.id+'.png">');
+        $("#content").html('<img height="500" width="423" src="https://serverhistrep.herokuapp.com/images/img-'+rep.id+'.jpg">');
     });
 
     $("#historyForm").html(rep.history);

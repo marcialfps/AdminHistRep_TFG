@@ -49,7 +49,7 @@ $(document).ready(function() {
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
-            alert("error...");
+            alert("Error when trying to login.");
         })
     });
 
@@ -102,15 +102,10 @@ function obtainRepresentations(user) {
         url: DBUrl+"/representations"
     })
     .done(function(data, textStatus, jqXHR) {
-        if(data.length <= 0) { //Not existing user
-            console.log("ERROR");
-        } else {
-            console.log(data);
-            showRepresentations(data, user);
-        }
+        showRepresentations(data, user);
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("error...");
+        alert("Erro when trying to obtain representations.");
     });
 }
 
