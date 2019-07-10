@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="description" content="Administration page">
@@ -22,19 +22,19 @@
         <header>
             <div class="d-sm-flex justify-content-between">
                 <div class="d-flex justify-content-center">
-                    <img class="img-logo ml-3" src="img/logo.png">
+                    <img class="img-logo ml-3" src="img/logo.png" alt="logo">
                     <h1 class="align-self-center header-text pl-3">Administration</h1>
                 </div>
 
                 <div class="d-flex justify-content-end">
                     <a class="align-self-center header-button pr-4" id="addAdmin" data-toggle="tooltip" data-trigger="active" title="Create admin">
-                            <img class="icon-btn" src="img/person_add.png">
+                            <img class="icon-btn" src="img/person_add.png" alt="add administrator">
                     </a>
                     <a class="align-self-center header-button pr-4" id="editAdmin" data-toggle="tooltip" data-trigger="active" title="Edit my account">
-                        <img class="icon-btn" src="img/settings_icon.png">
+                        <img class="icon-btn" src="img/settings_icon.png" alt="user settings">
                     </a>
                     <a class="align-self-center header-button pr-4" id="logoutAdmin" data-toggle="tooltip" data-trigger="active" title="Log out">
-                        <img class="icon-btn" src="img/exit_icon.png">
+                        <img class="icon-btn" src="img/exit_icon.png" alt="exit">
                     </a>
                 </div>
             </div>
@@ -51,13 +51,13 @@
                     <div class="card-body ">
                         <form id="loginForm">
                             <div class="form-group">
-                                <label for="inputEmail">E-mail</label>
+                                <label for="inputEmail" title="email">E-mail</label>
                                 <input type="email" name="email" class="form-control input-email" id="emailForm" 
                                     placeholder="Enter e-mail" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputEmail">Password</label>
+                                <label for="inputPassword" title="password">Password</label>
                                 <input type="password" name="password" class="form-control input-password" id="passwordForm" 
                                     placeholder="Enter password" required>
                             </div>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="d-flex justify-content-center pb-2">
                         <button type="button" class="btn btn-secondary btn-add" id="btnAdd">
-                            <img class="icon-img" src="img/add_icon.png">
+                            <img class="icon-img" src="img/add_icon.png" alt="add icon">
                         </button>
                     </div>
                     <div id="dialog-confirm" title="Confirm the action">
