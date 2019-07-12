@@ -4,8 +4,6 @@ var user;
 var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
-    //var remember_check = false;
-
     $("#representationsCard").hide();
     $("#logoutAdmin").hide();
     $("#userOptions").hide();
@@ -60,6 +58,7 @@ $(document).ready(function() {
         $("#loginCard").show();
         $("#representationsCard").hide();
         $("#logoutAdmin").hide();
+        $("#userOptions").hide();
     });
 });
 
@@ -109,8 +108,10 @@ function showRepresentations(data, user) {
         '<button type="button" class="btn btn-info btn-edit mr-2" id="edit-'+rep.id+'"><img class="icon-img" src="img/edit_icon.png"></button>'+
         '<button type="button" class="btn btn-danger mr-2" id="delete-'+rep.id+'"><img class="icon-img" src="img/delete_icon.png"></button></td></tr>');
 
-        $("#info-"+rep.id).attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/information/info.html?post='+rep.id+'"');
-        $("#edit-"+rep.id).attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/edition/edition.html?post='+rep.id+'"');
+        $("#info-"+rep.id).attr("onclick", 
+            'location.href="http://lanzar-uniovi.es/admin/information/info.html?post='+rep.id+'"');
+        $("#edit-"+rep.id).attr("onclick", 
+            'location.href="http://lanzar-uniovi.es/admin/edition/edition.html?post='+rep.id+'"');
         $("#delete-"+rep.id).click(function() {
             $( "#dialog-confirm" ).dialog({
                 buttons: {
@@ -127,9 +128,9 @@ function showRepresentations(data, user) {
         });
     });
 
-    $("#btnAdd").attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/edition/edition.html?post=-1"');
-    $("#addAdmin").attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/admin/create.html"');
-    $("#editAdmin").attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/admin/create.html?edit"');
+    $("#btnAdd").attr("onclick", 'location.href="http://lanzar-uniovi.es/admin/edition/edition.html?post=-1"');
+    $("#addAdmin").attr("onclick", 'location.href="http://lanzar-uniovi.es/admin/admin/create.html"');
+    $("#editAdmin").attr("onclick", 'location.href="http://lanzar-uniovi.es/admin/admin/create.html?edit"');
     $("#representationsCard").show();
     $("#logoutAdmin").show();
 }

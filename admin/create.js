@@ -5,7 +5,7 @@ var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
     $("#home").click(function (){
-        window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html"
     });
 
     obtainParam();
@@ -18,7 +18,7 @@ $(document).ready(function() {
     });
 
     $("#cancelBtn").click(function (){
-        window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html"
     });
 });
 
@@ -81,7 +81,7 @@ function saveAdmin() {
         } else {
             console.log(data[0]);
             $("#alert").hide();
-            window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
+            window.location.href = "http://lanzar-uniovi.es/admin/index.html"
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {

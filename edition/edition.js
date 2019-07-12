@@ -6,7 +6,7 @@ var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
     $("#home").click(function (){
-        window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html"
     });
 
     $('[data-toggle="tooltip"]').tooltip();   
@@ -20,16 +20,16 @@ $(document).ready(function() {
     });
 
     $("#cancelBtn").click(function (){
-        window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html"
     });
 });
 
 function obtainParam() {
     var urlparams = window.location.search.substring(1).split('&');
     console.log(urlparams)
-    if (urlparams[0] == "") window.location.href = "http://www.lanzar-uniovi.es/admin/index.html";
+    if (urlparams[0] == "") window.location.href = "http://lanzar-uniovi.es/admin/index.html";
     var user = localStorage.getItem('id');
-    if (!user) window.location.href = "http://www.lanzar-uniovi.es/admin/index.html";
+    if (!user) window.location.href = "http://lanzar-uniovi.es/admin/index.html";
     this.representationid = urlparams[0].split('=')[1];
 
     if (this.representationid == "-1") {
@@ -108,7 +108,7 @@ function saveMultimedia(rep) {
                 $("#alert").show();
             } else {
                 $("#alert").hide();
-                window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
+                window.location.href = "http://lanzar-uniovi.es/admin/index.html"
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
@@ -134,7 +134,7 @@ function saveImage(rep) {
                 $("#alert").show();
             } else {
                 $("#alert").hide();
-                window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
+                window.location.href = "http://lanzar-uniovi.es/admin/index.html"
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
