@@ -6,7 +6,8 @@ var DBUrl = "https://serverhistrep.herokuapp.com";
 $(document).ready(function() {
     $("#representationsCard").hide();
     $("#logoutAdmin").hide();
-    $("#userOptions").hide();
+    $("#addAdmin").hide();
+    $("#editAdmin").hide();
 
     $( "#dialog-confirm" ).dialog({
         autoOpen: false,
@@ -18,7 +19,6 @@ $(document).ready(function() {
 
     if (localStorage.getItem('id')) {
         $("#loginCard").hide();
-        $("#userOptions").show();
         obtainRepresentations(localStorage.getItem('id'));
     }
 
@@ -58,7 +58,8 @@ $(document).ready(function() {
         $("#loginCard").show();
         $("#representationsCard").hide();
         $("#logoutAdmin").hide();
-        $("#userOptions").hide();
+        $("#addAdmin").hide();
+        $("#editAdmin").hide();
     });
 });
 
@@ -133,6 +134,8 @@ function showRepresentations(data, user) {
     $("#editAdmin").attr("onclick", 'location.href="http://lanzar-uniovi.es/admin/admin/create.html?edit"');
     $("#representationsCard").show();
     $("#logoutAdmin").show();
+    $("#addAdmin").show();
+    $("#editAdmin").show();
 }
 
 function deleteRepresentation(id) {
