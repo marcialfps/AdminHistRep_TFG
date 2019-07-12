@@ -12,16 +12,16 @@ $(document).ready(function() {
     obtainRepresentation();
 
     $("#home").click(function (){
-        window.location.href = "http://127.0.0.1:5500/index.html"
+        window.location.href = "http://www.lanzar-uniovi.es/admin/index.html"
     });
 });
 
 function obtainParam() {
     var urlparams = window.location.search.substring(1).split('&');
     console.log(urlparams)
-    if (urlparams[0] == "") window.location.href = "http://127.0.0.1:5500/index.html";
+    if (urlparams[0] == "") window.location.href = "http://www.lanzar-uniovi.es/admin/index.html";
     var user = localStorage.getItem('id');
-    if (!user) window.location.href = "http://127.0.0.1:5500/index.html";
+    if (!user) window.location.href = "http://www.lanzar-uniovi.es/admin/index.html";
     this.representationid = urlparams[0].split('=')[1];
 }
 

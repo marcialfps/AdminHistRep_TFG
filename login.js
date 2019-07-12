@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     $("#representationsCard").hide();
     $("#logoutAdmin").hide();
+    $("#userOptions").hide();
 
     $( "#dialog-confirm" ).dialog({
         autoOpen: false,
@@ -19,6 +20,7 @@ $(document).ready(function() {
 
     if (localStorage.getItem('id')) {
         $("#loginCard").hide();
+        $("#userOptions").show();
         obtainRepresentations(localStorage.getItem('id'));
     }
 
@@ -52,18 +54,6 @@ $(document).ready(function() {
             alert("Error when trying to login.");
         })
     });
-
-    /*
-    $("#remember").click(function() {
-        if(!remember_check) {
-            $("#alertInfo").show();
-            remember_check = true;
-        } else {
-            $("#alertInfo").hide();
-            remember_check = false;
-        }
-    });
-    */
 
     $("#logoutAdmin").click(function() {
         localStorage.removeItem('id');
@@ -119,8 +109,8 @@ function showRepresentations(data, user) {
         '<button type="button" class="btn btn-info btn-edit mr-2" id="edit-'+rep.id+'"><img class="icon-img" src="img/edit_icon.png"></button>'+
         '<button type="button" class="btn btn-danger mr-2" id="delete-'+rep.id+'"><img class="icon-img" src="img/delete_icon.png"></button></td></tr>');
 
-        $("#info-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/information/info.html?post='+rep.id+'"');
-        $("#edit-"+rep.id).attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?post='+rep.id+'"');
+        $("#info-"+rep.id).attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/information/info.html?post='+rep.id+'"');
+        $("#edit-"+rep.id).attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/edition/edition.html?post='+rep.id+'"');
         $("#delete-"+rep.id).click(function() {
             $( "#dialog-confirm" ).dialog({
                 buttons: {
@@ -137,9 +127,9 @@ function showRepresentations(data, user) {
         });
     });
 
-    $("#btnAdd").attr("onclick", 'location.href="http://127.0.0.1:5500/edition/edition.html?post=-1"');
-    $("#addAdmin").attr("onclick", 'location.href="http://127.0.0.1:5500/admin/create.html"');
-    $("#editAdmin").attr("onclick", 'location.href="http://127.0.0.1:5500/admin/create.html?edit"');
+    $("#btnAdd").attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/edition/edition.html?post=-1"');
+    $("#addAdmin").attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/admin/create.html"');
+    $("#editAdmin").attr("onclick", 'location.href="http://www.lanzar-uniovi.es/admin/admin/create.html?edit"');
     $("#representationsCard").show();
     $("#logoutAdmin").show();
 }
