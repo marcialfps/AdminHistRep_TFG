@@ -8,6 +8,7 @@ $(document).ready(function() {
     $("#logoutAdmin").hide();
     $("#addAdmin").hide();
     $("#editAdmin").hide();
+    $("#loading").hide();
 
     $( "#dialog-confirm" ).dialog({
         autoOpen: false,
@@ -19,6 +20,7 @@ $(document).ready(function() {
 
     if (localStorage.getItem('id')) {
         $("#loginCard").hide();
+        $("#loading").show();
         obtainRepresentations(localStorage.getItem('id'));
     }
 
@@ -42,14 +44,14 @@ $(document).ready(function() {
             } else {
                 console.log("Login the user "+ $("#emailForm").val())
                 $("#alert").hide();
+                $("#loading").show();
                 obtainUser($("#emailForm").val());
-                
                 $("#loginCard").hide();
                 this.user = data;
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
-            alert("Error when trying to login.");
+            $("#alert").show();
         })
     });
 
@@ -93,6 +95,7 @@ function obtainRepresentations(user) {
     })
     .done(function(data, textStatus, jqXHR) {
         showRepresentations(data, user);
+        $("#loading").hide();
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         alert("Erro when trying to obtain representations.");

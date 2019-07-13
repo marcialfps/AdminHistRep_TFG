@@ -5,6 +5,8 @@ var isEdition = false;
 var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
+    $("#loading").hide();
+
     $("#home").click(function (){
         window.location.href = "http://lanzar-uniovi.es/admin/index.html"
     });
@@ -17,6 +19,7 @@ $(document).ready(function() {
     $("#updateForm").submit(function(event) {
         event.preventDefault();
         saveRepresentation();
+        $("#loading").show();
     });
 
     $("#cancelBtn").click(function (){
@@ -82,7 +85,7 @@ function saveRepresentation() {
             console.log(data[0]);
             $("#alert").hide();
             saveMultimedia(data[0]);
-            saveImage(data[0]);
+            
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -108,7 +111,7 @@ function saveMultimedia(rep) {
                 $("#alert").show();
             } else {
                 $("#alert").hide();
-                window.location.href = "http://lanzar-uniovi.es/admin/index.html"
+                saveImage(data[0]);
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
@@ -134,11 +137,13 @@ function saveImage(rep) {
                 $("#alert").show();
             } else {
                 $("#alert").hide();
+                $("#loading").hide();
                 window.location.href = "http://lanzar-uniovi.es/admin/index.html"
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             $("#alert").show();
+            $("#loading").hide();
     });
 }
 
