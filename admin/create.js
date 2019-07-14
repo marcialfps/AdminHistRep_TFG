@@ -10,10 +10,18 @@ $(document).ready(function() {
         window.location.href = "http://lanzar-uniovi.es/admin/index.html"
     });
 
+    /**
+     * Obtain params from the url in order to know if
+     * it is a admin creation or update.
+     */
     obtainParam();
 
     $('[data-toggle="tooltip"]').tooltip();   
 
+    /**
+     * When the form is submitted, save the admin and show
+     * loading spinner.
+     */
     $("#createForm").submit(function(event) {
         event.preventDefault();
         saveAdmin();
@@ -25,20 +33,27 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * This function search for a parameter in the url. If there are not
+ * parameters, is an admin creation. Otherwise, is an admin update.
+ */
 function obtainParam() {
-    console.log( window.location.search.substring(1));
     var urlparams = window.location.search.substring(1).split('&');
     if (urlparams[0] == "") {
         this.isCreation = true;
     } else {
-        console.log("Editing user");
-        $("#title").val("Edit account");
+        $("h2").text("Edit account");
         this.userId = localStorage.getItem('id');
         this.isCreation = false;
         obtainUser(this.userId);
     }
 }
 
+/**
+ * This function call the server and obtain all the data of
+ * the admin.
+ * @param {long} id 
+ */
 function obtainUser(id) {
     $.ajax({
         type: "GET",
@@ -47,23 +62,30 @@ function obtainUser(id) {
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
-            console.log("ERROR");
+            window.location.href = "http://lanzar-uniovi.es/admin/index.html"
         } else {
             console.log(data[0]);
             completeForm(data[0]);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("Error when trying to obtain user.");
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html"
     });
 }
 
+/**
+ * This function complete the form with the data of the admin.
+ * @param {list} user 
+ */
 function completeForm(user) {
     $("#nameForm").val(user.name);
     $("#lastnameForm").val(user.lastName);
     $("#emailForm").val(user.email);
 }
 
+/**
+ * This function call the service and add or update the admin.
+ */
 function saveAdmin() {
     console.log("Saving admin.");
     var url;

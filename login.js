@@ -4,11 +4,7 @@ var user;
 var DBUrl = "https://serverhistrep.herokuapp.com";
 
 $(document).ready(function() {
-    $("#representationsCard").hide();
-    $("#logoutAdmin").hide();
-    $("#addAdmin").hide();
-    $("#editAdmin").hide();
-    $("#loading").hide();
+    showLogin();
 
     $( "#dialog-confirm" ).dialog({
         autoOpen: false,
@@ -18,6 +14,11 @@ $(document).ready(function() {
         modal: true
       });
 
+    /**
+     * If the user has in local storage an item with name
+     * 'id', he is logged. So, hide login card and show
+     * the list of representations.
+     */
     if (localStorage.getItem('id')) {
         $("#loginCard").hide();
         $("#loading").show();
@@ -39,7 +40,6 @@ $(document).ready(function() {
         .done(function(data, textStatus, jqXHR) {
             console.log(data);
             if(data.toString() == "false") { //Not existing user
-                console.log("The user does not exist");
                 $("#alert").show();
             } else {
                 console.log("Login the user "+ $("#emailForm").val())
@@ -55,6 +55,11 @@ $(document).ready(function() {
         })
     });
 
+    /**
+     * When user logout, remove the item from local
+     * storage, hide all elements used by the user
+     * and show login card.
+     */
     $("#logoutAdmin").click(function() {
         localStorage.removeItem('id');
         $("#loginCard").show();
@@ -65,6 +70,11 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * This function call the server an obtain an user
+ * by its email.
+ * @param {string} email 
+ */
 function obtainUser(email) {
     $.ajax({
         type: "GET",
@@ -73,7 +83,7 @@ function obtainUser(email) {
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
-            console.log("ERROR");
+            showLogin();
         } else {
             console.log(data[0]);
             this.user = data[0];
@@ -83,10 +93,15 @@ function obtainUser(email) {
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("Error when trying to obtain user.");
+        showLogin();
     });
 }
 
+/**
+ * This function call the server and obtain all
+ * the representations.
+ * @param {long} user 
+ */
 function obtainRepresentations(user) {
     $.ajax({
         type: "GET",
@@ -98,12 +113,17 @@ function obtainRepresentations(user) {
         $("#loading").hide();
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("Erro when trying to obtain representations.");
+        showLogin();
     });
 }
 
+/**
+ * This function add elements to the HTML in order to show
+ * all the representations and their buttons.
+ * @param {list} data 
+ * @param {long} user 
+ */
 function showRepresentations(data, user) {
-    console.log(user);
     $("#listRepresentations").empty();
 
     $.each(data, function(index, rep) {
@@ -135,15 +155,17 @@ function showRepresentations(data, user) {
     $("#btnAdd").attr("onclick", 'location.href="http://lanzar-uniovi.es/admin/edition/edition.html?post=-1"');
     $("#addAdmin").attr("onclick", 'location.href="http://lanzar-uniovi.es/admin/admin/create.html"');
     $("#editAdmin").attr("onclick", 'location.href="http://lanzar-uniovi.es/admin/admin/create.html?edit"');
-    $("#representationsCard").show();
-    $("#logoutAdmin").show();
-    $("#addAdmin").show();
-    $("#editAdmin").show();
+    showHome();
 }
 
+/**
+ * This function call the server in order to remove
+ * the representation. Next, the list of representations
+ * is updated.
+ * @param {long} id 
+ */
 function deleteRepresentation(id) {
     var user = localStorage.getItem('id');
-    console.log("Trying to remove representation "+id);
     $.ajax({
         type: "GET",
         dataType: "text",
@@ -151,12 +173,35 @@ function deleteRepresentation(id) {
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0 || data.toString() == "Error") { //Not existing user
-            console.log("ERROR");
+            showLogin();
         } else {
             obtainRepresentations(user.id);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("error...");
+        showLogin();
     });
+}
+
+/**
+ * Auxiliar function to show login card.
+ */
+function showLogin() {
+    $("#representationsCard").hide();
+    $("#logoutAdmin").hide();
+    $("#addAdmin").hide();
+    $("#editAdmin").hide();
+    $("#loading").hide();
+    $("#loginCard").show();
+}
+
+/**
+ * Auxiliar function to show list of
+ * representations.
+ */
+function showHome() {
+    $("#representationsCard").show();
+    $("#logoutAdmin").show();
+    $("#addAdmin").show();
+    $("#editAdmin").show();
 }

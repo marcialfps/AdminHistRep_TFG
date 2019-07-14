@@ -16,17 +16,25 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * This functions obtains the url params. The second param is assigned
+ * to the representation id.
+ */
 function obtainParam() {
     var urlparams = window.location.search.substring(1).split('&');
-    console.log(urlparams)
-    if (urlparams[0] == "") window.location.href = "http://lanzar-uniovi.es/admin/index.html";
     var user = localStorage.getItem('id');
-    if (!user) window.location.href = "http://lanzar-uniovi.es/admin/index.html";
+    if (!user || urlparams[0] == "")  {
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html";
+    }
+
     this.representationid = urlparams[0].split('=')[1];
 }
 
-
-function obtainRepresentation(progressbar) {
+/**
+ * This function calls the server and obtain the data of the
+ * representation.
+ */
+function obtainRepresentation() {
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -34,16 +42,21 @@ function obtainRepresentation(progressbar) {
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
-            console.log("ERROR");
+            window.location.href = "http://lanzar-uniovi.es/admin/index.html";
         } else {
             completePage(data[0]);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("error...");
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html";
     });
 }
 
+/**
+ * This function update the HTML with the data of the
+ * representation.
+ * @param {list} rep 
+ */
 function completePage(rep) {
     $("#title").html(rep.title);
     $("#description").html(rep.description);

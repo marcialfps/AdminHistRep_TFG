@@ -13,9 +13,15 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();   
 
+    /**
+     * Obtain the params from the url to know if is representation
+     * edition or creation.
+     */
     obtainParam();
     
-
+    /**
+     * When the form is submitted, the representation is saved.
+     */
     $("#updateForm").submit(function(event) {
         event.preventDefault();
         saveRepresentation();
@@ -27,26 +33,32 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * Obtain the params from the url. If the first param is empty or the 
+ * local storage has not the user, reload main page. Also, if the second
+ * parameters is -1 it is creation mode.
+ */
 function obtainParam() {
     var urlparams = window.location.search.substring(1).split('&');
-    console.log(urlparams)
-    if (urlparams[0] == "") window.location.href = "http://lanzar-uniovi.es/admin/index.html";
     var user = localStorage.getItem('id');
-    if (!user) window.location.href = "http://lanzar-uniovi.es/admin/index.html";
+    if (!user || urlparams[0] == "") {
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html";
+    }
+
     this.representationid = urlparams[0].split('=')[1];
 
     if (this.representationid == "-1") {
         isEdition = false;
     } else {
         isEdition = true;
-        editionMode();
+        obtainRepresentation();
     }
 }
 
-function editionMode() {
-    obtainRepresentation();
-}
-
+/**
+ * This function call the server and obtain all the data
+ * of the representation.
+ */
 function obtainRepresentation() {
     $.ajax({
         type: "GET",
@@ -55,18 +67,21 @@ function obtainRepresentation() {
     })
     .done(function(data, textStatus, jqXHR) {
         if(data.length <= 0) { //Not existing user
-            console.log("ERROR");
+            window.location.href = "http://lanzar-uniovi.es/admin/index.html";
         } else {
             completeForm(data[0]);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("error...");
+        window.location.href = "http://lanzar-uniovi.es/admin/index.html";
     });
 }
 
+/**
+ * This function call the server and save or update the representation.
+ * After that, it tries to load the representation video.
+ */
 function saveRepresentation() {
-    console.log("Saving representation.");
     var url;
     if(isEdition)
         url = DBUrl+"/representation/update/"+this.representationid;
@@ -82,10 +97,8 @@ function saveRepresentation() {
         if(data.length <= 0) { //Not existing user
             $("#alert").show();
         } else {
-            console.log(data[0]);
             $("#alert").hide();
-            saveMultimedia(data[0]);
-            
+            saveMultimedia(data[0]);   
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -93,10 +106,15 @@ function saveRepresentation() {
     });
 }
 
+/**
+ * This function calls the server and send the representation
+ * video. After that, it tries to load the representation 
+ * image.
+ * @param {list} rep 
+ */
 function saveMultimedia(rep) {
     var fd = new FormData();
     fd.append("file", representationForm.files[0]);
-    console.log(representationForm.files[0]);
     $.ajax({
         type: "POST",
         data: fd,
@@ -119,6 +137,11 @@ function saveMultimedia(rep) {
     });
 }
 
+/**
+ * This function calls the server and send the representation
+ * image. When finished, reload the list of representations.
+ * @param {list} rep 
+ */
 function saveImage(rep) {
     var fd = new FormData();
     fd.append("file", representationImageForm.files[0]);
@@ -147,6 +170,10 @@ function saveImage(rep) {
     });
 }
 
+/**
+ * Complete the form with all the data of the representation.
+ * @param {list} rep 
+ */
 function completeForm(rep) {
     $("#titleForm").val(rep.title);
     $("#descriptionForm").html(rep.description);
